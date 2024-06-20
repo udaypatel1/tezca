@@ -1,5 +1,5 @@
 use image::{DynamicImage, GenericImageView, Pixel};
-use std::path::Path;
+use std::{path::Path, sync::mpsc, thread, time::Duration};
 
 pub fn load_image<P: AsRef<Path>>(path: P) -> DynamicImage {
 
@@ -54,11 +54,33 @@ fn covariance(image1: &DynamicImage, mean1: f64, image2: &DynamicImage, mean2: f
 
 pub fn compute_ssim(image1: &DynamicImage, image2: &DynamicImage) -> f64 {
 
-	let mean1 = mean(image1);
-	let mean2 = mean(image2);
+	let (img1_clone1, img1_clone2) = (image1.clone(), image1.clone());
+	let (img2_clone1, img2_clone2) = (image2.clone(), image2.clone());
 
-	let variance1 = variance(image1, mean1);
-	let variance2 = variance(image2, mean2);
+	let (mean_var_tx1, mean_var_rx1) = mpsc::channel();
+	let(mean_var_tx2, mean_var_rx2) = mpsc::channel();
+
+	let handle_image1 = thread::spawn(move || {
+		
+		let mean1 = mean(&img1_clone1);
+		let variance1 = variance(&img1_clone2, mean1);
+
+		let _ = mean_var_tx1.send((mean1, variance1));
+	});
+
+	let handle_image2 = thread::spawn(move || {
+		
+		let mean2 = mean(&img2_clone1);
+		let variance2 = variance(&img2_clone2, mean2);
+
+		let _ = mean_var_tx2.send((mean2, variance2));
+	});
+
+	let (mean1, variance1) = mean_var_rx1.recv().unwrap();
+	let (mean2, variance2) = mean_var_rx2.recv().unwrap();
+
+	handle_image1.join().unwrap();
+	handle_image2.join().unwrap();
 
 	let covariance = covariance(image1, mean1, image2, mean2);
 
