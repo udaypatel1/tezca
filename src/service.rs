@@ -62,8 +62,11 @@ pub fn compute_ssim(image1: &DynamicImage, image2: &DynamicImage) -> f64 {
 
 	let covariance = covariance(image1, mean1, image2, mean2);
 
-	const C1: f64 = 6.5025;
-	const C2: f64 = 58.5225;
+	let K1: f64 = 0.01;
+	let K2: f64 = 0.03;
+
+	let C1: f64 = (K1 * 255.0).powi(K1 as i32);
+	let C2: f64 = (K2 * 255.0).powi(K2 as i32);
 
 	let ssim = ((2.0 * mean1 * mean2 * C1) * (2.0 * covariance + C2)) / ((mean1.powi(2) + mean2.powi(2) + C1) * (variance1 + variance2 + C2));
 
