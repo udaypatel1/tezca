@@ -1,7 +1,7 @@
 mod args;
 mod service;
 
-use std::time::{self, Duration, Instant};
+use std::time::{Instant};
 
 use args::get_args;
 use service::{load_image, compute_ssim};
@@ -18,12 +18,12 @@ fn main() {
     let elapsed = now.elapsed();
     println!("Both file load time elapsed: {:?}", elapsed);
 
-    let nowProcess = Instant::now();
+    let now_process = Instant::now();
 
     let ssim = compute_ssim(&img1, &img2);
 
-    let processElapsed = nowProcess.elapsed();
+    let process_elapsed = now_process.elapsed();
 
-    println!("Algorithm time: {:?}", processElapsed);
+    println!("Algorithm time: {:?}", process_elapsed);
     println!("Similarity Index: {:?}", ssim);
 }
