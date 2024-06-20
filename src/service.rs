@@ -1,9 +1,29 @@
-use image::{DynamicImage, GenericImageView, Pixel};
-use std::{path::Path, sync::mpsc, thread, time::Duration};
+use image::{imageops::FilterType, DynamicImage, GenericImageView, Pixel};
+use std::{path::Path, sync::mpsc, thread};
 
 pub fn load_image<P: AsRef<Path>>(path: P) -> DynamicImage {
 
 	image::open(path).expect("Failed to load image")
+}
+
+fn match_dimensions(image1: &DynamicImage, image2: &DynamicImage) -> (DynamicImage, DynamicImage) {
+
+
+	let (width1, height1) = image1.dimensions();
+	let (width2, height2) = image2.dimensions();
+
+	if width1 == width2 && height1 == height2 {
+		(image1.clone(), image2.clone())
+	}
+	else if (width1 * height1) > (width2 * height2) {
+
+		let resized_image_1 = image1.resize(width2, height2, FilterType::Nearest);
+		(resized_image_1, image2.clone())
+	}
+	else {
+		let resized_image_2 = image2.resize(width1, height1, FilterType::Nearest);
+		(image1.clone(), resized_image_2)
+	}
 }
 
 fn mean(image: &DynamicImage) -> f64 {
@@ -54,6 +74,8 @@ fn covariance(image1: &DynamicImage, mean1: f64, image2: &DynamicImage, mean2: f
 
 pub fn compute_ssim(image1: &DynamicImage, image2: &DynamicImage) -> f64 {
 
+	let (image1, image2) = match_dimensions(image1, image2);
+
 	let (img1_clone1, img1_clone2) = (image1.clone(), image1.clone());
 	let (img2_clone1, img2_clone2) = (image2.clone(), image2.clone());
 
@@ -82,7 +104,7 @@ pub fn compute_ssim(image1: &DynamicImage, image2: &DynamicImage) -> f64 {
 	handle_image1.join().unwrap();
 	handle_image2.join().unwrap();
 
-	let covariance = covariance(image1, mean1, image2, mean2);
+	let covariance = covariance(&image1, mean1, &image2, mean2);
 
 	let K1: f64 = 0.01;
 	let K2: f64 = 0.03;
