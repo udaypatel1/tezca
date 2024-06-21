@@ -112,7 +112,7 @@ pub fn compute_ssim(image1: &DynamicImage, image2: &DynamicImage) -> f64 {
 	let c1: f64 = (k1 * 255.0).powi(k1 as i32);
 	let c2: f64 = (k2 * 255.0).powi(k2 as i32);
 
-	let ssim = ((2.0 * mean1 * mean2 * c1) * (2.0 * covariance + c2)) / ((mean1.powi(2) + mean2.powi(2) + c1) * (variance1 + variance2 + c2));
+	let ssim = ((2.0 * mean1 * mean2 * c1) * ((2.0 * covariance) + c2) * ((f64::sqrt(covariance) + (c2 / 2.)))) / ((mean1.powi(2) + mean2.powi(2) + c1) * (variance1 + variance2 + c2) * ((f64::sqrt(variance1) * f64::sqrt(variance2)) + (c2 / 2.)));
 
 	ssim
 }

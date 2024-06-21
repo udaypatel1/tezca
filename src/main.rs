@@ -1,10 +1,10 @@
 mod args;
 mod service;
 
-use std::time::{Instant};
+use std::time::Instant;
 
 use args::get_args;
-use service::{load_image, compute_ssim};
+use service::{compute_ssim, load_image};
 
 fn main() {
     
