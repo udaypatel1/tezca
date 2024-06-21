@@ -71,11 +71,18 @@ Much is left to do and plan for the future of this initiative. It's meant to be 
 
 Please raise an **Issue** and make a **Pull Request** if you would like to do any of the following:
 
-1. Make this even faster
-2. Build a benchmarking feature
-3. More effectively manage threads
-4. Have ideas for CLI subcommands or flags to expand your proposed functionality
-5. Update this README
-6. <sub>Want to do something cool and new with Rust that is beginner-friendly and applicable but still meaningful + you meet the minimum coolness factor :)</sub>
+* Make this even faster (smarter threading, more concurrent processes, a more accurate algorithm, etc)
+  - smarter threading strategies
+  - more concurrent processes
+  - refining current algorithms
+  - adding additional algorithms to refine index accuracy
+* Build a benchmarking feature
+  - introduce unit testing natively in Rust
+* Decouple components / services for better maintanability and structure
+  - add Github Actions for automated CI/CD related goodies
+* Build better thread management
+* Have ideas for CLI subcommands or flags to expand your proposed functionality
+* Update this README
+* <sub>Want to do something cool and new with Rust that is beginner-friendly and applicable but still meaningful + you meet the minimum coolness factor :)</sub>
 
 > *This repo is in **WIP** status. For more information on non-ML based image processing, read [this](https://en.wikipedia.org/wiki/Structural_similarity_index_measure)*
