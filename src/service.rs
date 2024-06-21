@@ -1,4 +1,5 @@
 use image::{imageops::FilterType, DynamicImage, GenericImageView, Pixel};
+use rayon::iter::{ParallelBridge, ParallelIterator};
 use std::{path::Path, sync::mpsc, thread};
 
 pub fn load_image<P: AsRef<Path>>(path: P) -> DynamicImage {
@@ -30,12 +31,15 @@ fn mean(image: &DynamicImage) -> f64 {
 
 	let (width, height) = image.dimensions();
 	let pixel_count = (width * height) as f64;
-	let mut sum = 0.0;
 
-	for pixel in image.pixels() {
+	let sum: f64 = image.pixels()
+						.par_bridge()
+						.map(|pixel| {
 
-		sum += pixel.2.to_luma().0[0] as f64;
-	}
+							pixel.2.to_luma().0[0] as f64
+
+						})
+						.sum();
 
 	sum / pixel_count
 }
@@ -44,13 +48,16 @@ fn variance(image: &DynamicImage, mean: f64) -> f64 {
 
 	let (width, height) = image.dimensions();
 	let pixel_count = (width * height) as f64;
-	let mut sum = 0.0;
 
-	for pixel in image.pixels() {
+	let sum: f64 = image.pixels()
+						.par_bridge()
+						.map(|pixel| {
 
-		let value = pixel.2.to_luma().0[0] as f64;
-		sum += (value - mean).powi(2);
-	}
+							let value = pixel.2.to_luma().0[0] as f64;
+							(value - mean).powi(2)
+							
+						})
+						.sum();
 
 	sum / pixel_count
 }
@@ -59,14 +66,19 @@ fn covariance(image1: &DynamicImage, mean1: f64, image2: &DynamicImage, mean2: f
 
 	let (width, height) = image1.dimensions();
 	let pixel_count = (width * height) as f64;
-	let mut sum = 0.0;
+	
+	let sum: f64 = image1
+					.pixels()
+					.zip(image2.pixels())
+					.par_bridge()
+					.map(|(p1, p2)| {
 
-	for (p1, p2) in image1.pixels().zip(image2.pixels()) {
-		let value1 = p1.2.to_luma().0[0] as f64;
-		let value2 = p2.2.to_luma().0[0] as f64;
+						let value1 = p1.2.to_luma().0[0] as f64;
+						let value2: f64 = p2.2.to_luma().0[0] as f64;
 
-		sum += (value1 - mean1) * (value2 - mean2);
-	}
+						(value1 - mean1) * (value2 - mean2)
+					})
+					.sum();
 
 	sum / pixel_count
 
