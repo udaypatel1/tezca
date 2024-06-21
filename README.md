@@ -32,5 +32,5 @@
 
 </h3>
 <br />
-  <h1>⚡️ Super fast image comparison ⚡️</h1>
+<h1 align="center">Super fast image comparison</h1>
 </div>
