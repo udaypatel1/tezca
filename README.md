@@ -69,7 +69,7 @@ cargo run -- assets/sf.jpg assets/la.jpg
 
 Much is left to do and plan for the future of this initiative. It's meant to be a simple, easy-to-use, and performant CLI tool to compare images in a file system.
 
-Please raise an **Issue** and make a **Pull Request** if you would like to do any of the following:
+Please raise an **Issue**, create a **Branch** and make a **Pull Request** to **main** if you would like to do any of the following:
 
 * Make this even faster
   - smarter threading strategies

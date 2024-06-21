@@ -1,10 +1,9 @@
-mod args;
-mod service;
+mod cli;
+mod algorithms;
 
 use std::time::Instant;
-
-use args::get_args;
-use service::{compute_ssim, load_image};
+use cli::args::get_args;
+use algorithms::ssim::{compute_ssim, load_image};
 
 fn main() {
     
