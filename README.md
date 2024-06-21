@@ -14,7 +14,7 @@
 <br />
 <div align="center">
   <a href="">
-    <img alt="" src="https://img.shields.io/badge/any_text-you_like-green">
+    <img alt="" src="https://github.com/udaypatel1/tezca/actions/workflows/main.yaml/badge.svg">
   </a>
   <a href="">
     <img alt="" src="https://img.shields.io/badge/any_text-you_like-red" height="20" width="auto">
