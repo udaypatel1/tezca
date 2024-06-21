@@ -71,7 +71,7 @@ Much is left to do and plan for the future of this initiative. It's meant to be 
 
 Please raise an **Issue** and make a **Pull Request** if you would like to do any of the following:
 
-* Make this even faster (smarter threading, more concurrent processes, a more accurate algorithm, etc)
+* Make this even faster
   - smarter threading strategies
   - more concurrent processes
   - refining current algorithms
