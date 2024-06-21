@@ -5,7 +5,7 @@
     <picture>
        <source media="(prefers-color-scheme: dark)" srcset="assets/tezca_light.svg">
       <source media="(prefers-color-scheme: light)" srcset="assets/tezca_dark.svg">
-    <img alt="Tremor Logo" src="assets/tezca_light.svg" height="250"/>
+    <img alt="Trezca Logo" src="assets/tezca_light.svg" height="250"/>
     </picture>
   </a>
 </p>
