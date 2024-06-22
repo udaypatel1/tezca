@@ -1,5 +1,3 @@
-<br />
-<br />
 <p align="center">
   <a href="">
     <picture>
@@ -10,8 +8,6 @@
   </a>
 </p>
 <div align="center">
-<br />
-<br />
 <div align="center">
   <a href="">
     <img alt="" src="https://github.com/udaypatel1/tezca/actions/workflows/main.yaml/badge.svg">
