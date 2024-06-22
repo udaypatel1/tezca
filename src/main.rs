@@ -13,6 +13,7 @@ fn main() {
 
     let img1 = load_image(&args.file1);
     let img2 = load_image(&args.file2);
+    let threshold = args.threshold;
 
     let elapsed = now.elapsed();
     println!("Both file load time elapsed: {:?}", elapsed);
@@ -25,4 +26,5 @@ fn main() {
 
     println!("Algorithm time: {:?}", process_elapsed);
     println!("Similarity Index: {:?}", ssim);
+    println!("Above Threshold [{:1}%]: {:?}", threshold, if (ssim * 100.) >= threshold { true } else { false });
 }
