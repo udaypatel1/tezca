@@ -13,16 +13,7 @@
     <img alt="" src="https://github.com/udaypatel1/tezca/actions/workflows/main.yaml/badge.svg">
   </a>
   <a href="">
-    <img alt="" src="https://img.shields.io/badge/any_text-you_like-red" height="20" width="auto">
-  </a>
-  <a href="">
     <img alt="License Apache 2.0" src="https://img.shields.io/badge/license-Apache 2.0-blue.svg?style=flat&color=3b82f6&labelColor=334155 " height="20" width="auto">
-  </a>
-  <a href="">
-    <img src="https://img.shields.io/badge/any_text-you_like-purple" alt="" />
-  </a>
-  <a href="">
-    <img src="https://img.shields.io/badge/any_text-you_like-yellow" alt="" />
   </a>
 </div>
 
