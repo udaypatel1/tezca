@@ -13,9 +13,11 @@ fn main() {
 
     let img1 = load_image(&args.file1);
     let img2 = load_image(&args.file2);
-    let threshold = args.threshold;
 
     let elapsed = now.elapsed();
+
+    let threshold = args.threshold;
+
     println!("Both file load time elapsed: {:?}", elapsed);
 
     let now_process = Instant::now();

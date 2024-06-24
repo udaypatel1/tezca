@@ -411,6 +411,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "image-compare"
+version = "0.4.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "96cd73af13ae2e7220a1c02fe7d6bb53be50612ba7fabbb5c88e7753645f1f3c"
+dependencies = [
+ "image",
+ "itertools",
+ "rayon",
+ "thiserror",
+]
+
+[[package]]
 name = "image-webp"
 version = "0.1.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -934,6 +946,7 @@ version = "0.1.0"
 dependencies = [
  "clap",
  "image",
+ "image-compare",
 ]
 
 [[package]]
