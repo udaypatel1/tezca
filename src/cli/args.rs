@@ -1,5 +1,5 @@
 
-use clap::{Args, Parser, Subcommand};
+use clap::{ArgAction, Args, Parser, Subcommand};
 
 #[derive(Parser)]
 #[command(name = "tez")]
@@ -15,28 +15,16 @@ pub struct Cli {
 
 #[derive(Subcommand)]
 #[command(about = "Subcommand Options", long_about = None)]
-enum Commands {
+pub enum Commands {
 
-	List(ListArgs),
-	Algorithm(Algorithm),
-}
-
-#[derive(Parser)]
-struct Algorithm {
-	#[clap(subcommand)]
-	algorithm: AlgorithmType,
-}
-
-#[derive(Subcommand)]
-enum AlgorithmType {
 	Ssim(SsimArgs),
 }
 
 #[derive(Args)]
-struct ListArgs {}
+pub struct SsimArgs {
 
-#[derive(Args)]
-struct SsimArgs {
+	#[clap(long, short, action = ArgAction::SetFalse, help = "Force match the dimensions of both images")]
+	pub force: Option<bool>,
 
 	#[arg(help = "First image file to compare")]
 	pub file1: String,
